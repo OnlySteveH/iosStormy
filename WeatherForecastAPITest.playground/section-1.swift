@@ -16,6 +16,10 @@ let weatherData = NSData(contentsOfURL: forecastURL!, options: nil, error: nil)
 
 println(weatherData)
 
+let languages = ["iOS": "Swift", "Android": "Java"]
+languages["iOS"]
+
+
 
 
 
