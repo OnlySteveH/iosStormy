@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var precipitationLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var refreshButton: UIButton!
+    @IBOutlet weak var refreshActivityIndicator: UIActivityIndicatorView!
     
     
     
@@ -26,6 +28,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        refreshActivityIndicator.hidden = true
+        getCurrentWeatherData()
+        
+        
+    }
+    
+    func getCurrentWeatherData() -> Void {
         let baseURL = NSURL(string: "https://api.forecast.io/forecast/\(apiKey)/")
         
         let forecastURL = NSURL(string: "52.438297,1.390112", relativeToURL: baseURL)
@@ -38,12 +47,28 @@ class ViewController: UIViewController {
                 let currentWeather = Current(weatherDictionary: weatherDictionary)
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.temperatureLabel.text = "\(currentWeather.temperature)"
+                    self.iconView.image = currentWeather.icon!
+                    self.currentTimeLabel.text = "At \(currentWeather.currentTime!) it is"
+                    self.humidityLabel.text = "\(currentWeather.humidity)"
+                    self.precipitationLabel.text = "\(currentWeather.precipProbability)"
+                    self.summaryLabel.text = "\(currentWeather.summary)"
+                    self.refreshButton.hidden = false
+                    self.refreshActivityIndicator.hidden = true
+                    self.refreshActivityIndicator.stopAnimating()
+                    
                 })
             }
         })
         downloadTask.resume()
-        
     }
+    
+    @IBAction func refresh(sender: AnyObject) {
+        getCurrentWeatherData()
+        refreshButton.hidden = true
+        refreshActivityIndicator.hidden = false
+        refreshActivityIndicator.startAnimating()
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
