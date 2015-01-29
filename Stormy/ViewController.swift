@@ -57,6 +57,21 @@ class ViewController: UIViewController {
                     self.refreshActivityIndicator.stopAnimating()
                     
                 })
+            } else {
+                // there's an error
+                println(error)
+                let networkIssueController = UIAlertController(title: "Error", message: "Unable to load data", preferredStyle: .Alert)
+                let okButton = UIAlertAction(title: "Error", style: .Default, handler: nil)
+                let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+                networkIssueController.addAction(okButton)
+                networkIssueController.addAction(cancelButton)
+                self.presentViewController(networkIssueController, animated: true, completion: nil)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.refreshButton.hidden = false
+                    self.refreshActivityIndicator.hidden = true
+                    self.refreshActivityIndicator.stopAnimating()
+                })
+                
             }
         })
         downloadTask.resume()
