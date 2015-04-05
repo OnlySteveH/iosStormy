@@ -42,7 +42,7 @@ struct Current {
     func weatherIconFromString(stringIcon: String) -> UIImage {
         var imageName: String
         
-        
+        // set icons by string from forecast.io
         switch stringIcon {
             case "clear-day":
                 imageName = "clear-day"

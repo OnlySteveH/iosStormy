@@ -55,7 +55,7 @@ class ViewController: UIViewController {
                     
                 })
             } else {
-                // there's an error
+                // there's an error - handle it
                 println(error)
                 let networkIssueController = UIAlertController(title: "Error", message: "Unable to load data", preferredStyle: .Alert)
                 let okButton = UIAlertAction(title: "Error", style: .Default, handler: nil)
