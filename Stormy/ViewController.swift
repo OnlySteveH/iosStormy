@@ -21,8 +21,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var refreshActivityIndicator: UIActivityIndicatorView!
     
-    
-    
     private let apiKey = "d0bbfb359e73a19d161686e885d73d68"
 
     override func viewDidLoad() {
@@ -30,7 +28,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         refreshActivityIndicator.hidden = true
         getCurrentWeatherData()
-        
         
     }
     
@@ -71,7 +68,6 @@ class ViewController: UIViewController {
                     self.refreshActivityIndicator.hidden = true
                     self.refreshActivityIndicator.stopAnimating()
                 })
-                
             }
         })
         downloadTask.resume()
@@ -83,13 +79,10 @@ class ViewController: UIViewController {
         refreshActivityIndicator.hidden = false
         refreshActivityIndicator.startAnimating()
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
